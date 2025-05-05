@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pondering Pens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0a0a0a;
+      font-family: 'Playfair Display', serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 3.45rem;
+      margin-bottom: 20px;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .start-button {
+      position: relative;
+      background-color: #1f1f1f;
+      color: white;
+      font-weight: bold;
+      padding: 14px 28px;
+      border-radius: 12px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      border: none;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .start-button:hover {
+      transform: scale(1.05);
+    }
+
+    .start-button:active {
+      transform: scale(0.95);
+    }
+
+    .start-button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      padding: 2px;
+      background: linear-gradient(to right, #8B4513, #A0522D, #CD853F);
+      border-radius: 12px;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .start-button:hover::before {
+      opacity: 1;
+    }
+
+    .start-button span {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .start-button svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .start-button:hover svg {
+      transform: translateX(5px);
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 100vh;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .column {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-container {
+      position: absolute;
+      width: 100%;
+      height: calc(300px * 8);
+      animation: scroll 20s linear infinite;
+    }
+
+    .column:nth-child(2) .image-container {
+      animation-direction: reverse;
+    }
+
+    .image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-1200px);
+      }
+    }
+
+    .bottom-links {
+      position: fixed;
+      bottom: 0.2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+      font-size: 1rem;
+      color: #ffffff;
+      font-family: 'Playfair Display', serif;
+      z-index: 20;
+    }
+
+    .bottom-links a {
+      color: #ffffff;
+      text-decoration: none;
+      margin: 0 18px;;
+      display: inline-flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .bottom-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Pondering Pens</h1>
+    <button class="start-button" onclick="window.location.href='choose.html'">
+      <span>
+        Let's get started
+        <svg fill="currentColor" viewBox="0 0 20 20">
+          <path clip-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" fill-rule="evenodd"></path>
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="column">
+      <div class="image-container">
+        <img src="images/poet/albert.jpeg" class="image" />
+        <img src="images/poet/dosta.jpg" class="image" />
+        <img src="images/poet/kafka.jpg" class="image" />
+        <img src="images/poet/SYlvia.jpg" class="image" />
+        <img src="images/poet/albert.jpeg" class="image" />
+        <img src="images/poet/dosta.jpg" class="image" />
+        <img src="images/poet/kafka.jpg" class="image" />
+        <img src="images/poet/SYlvia.jpg" class="image" />
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="image-container">
+        <img src="images/poet/will.jpg" class="image" />
+        <img src="images/poet/butler.jpg" class="image" />
+        <img src="images/poet/pablo.jpg" class="image" />
+        <img src="images/poet/oscar.jpg" class="image" />
+        <img src="images/poet/will.jpg" class="image" />
+        <img src="images/poet/butler.jpg" class="image" />
+        <img src="images/poet/pablo.jpg" class="image" />
+        <img src="images/poet/oscar.jpg" class="image" />
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="image-container">
+        <img src="images/poet/john.jpg" class="image" />
+        <img src="images/poet/galib.jpg" class="image" />
+        <img src="images/poet/marcus.png" class="image" />
+        <img src="images/poet/funny.jpg" class="image" />
+        <img src="images/poet/john.jpg" class="image" />
+        <img src="images/poet/galib.jpg" class="image" />
+        <img src="images/poet/marcus.png" class="image" />
+        <img src="images/poet/funny.jpg" class="image" />
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-links">
+    <a href="https://www.instagram.com/pondering_pens?igsh=MXVvanloMHFncHU1OA==" target="_blank"><i class="fab fa-instagram"></i> </a> ·
+    <a href="https://www.instagram.com/zephyr_4772?igsh=MWNnbHEwM3l4ZmZtbg%3D%3D" target="_blank"><i class="fab fa-instagram"></i> </a> ·
+    <a href="https://www.linkedin.com/in/sinhal-joshi-244603275?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i> </a> ·
+    <a href="https://github.com/Zephyr4772" target="_blank"><i class="fab fa-github"></i> </a>
+  </div>
+</body>
+</html>

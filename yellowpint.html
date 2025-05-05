@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom Image Gallery with Buttons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(100px, 100px);
+            gap: 15px;
+            padding: 30px 5%;
+            grid-auto-flow: dense;
+        }
+
+        .grid-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #2a2a2a;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hover-content {
+            display: none;
+        }
+
+        .grid-item:hover .hover-content {
+            opacity: 1;
+        }
+
+        .grid-item button {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container"></div>
+
+    <script>
+        const gridContainer = document.querySelector('.grid-container');
+        let imageCount = 1;
+        const aspectRatios = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2];
+        const colorThemes = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeead', '#ff9f68'];
+
+        // Regular images
+        const customImages = [
+                'y (1).jpeg',
+                'y (2).jpeg',
+                'y (3).jpeg',
+                'y (4).jpeg',
+                'y (5).jpeg',
+                'y (6).jpeg',
+                'y (7).jpeg',
+                'y (8).jpeg',
+                'y (9).jpeg',
+                'y (10).jpeg',
+                'y (11).jpeg',
+                'y (12).jpeg',
+                'y (13).jpeg',
+                'y (14).jpeg',
+                'y (15).jpeg',
+                'y (16).jpeg',
+                'y (17).jpeg',
+                'y (18).jpeg',
+                'y (19).jpeg',
+                'y (20).jpeg',
+                'y (21).jpeg',
+                'y (22).jpeg',
+                'y (23).jpeg',
+                'y (24).jpeg',
+                'y (25).jpeg',
+                'y (26).jpeg',
+                'y (27).jpeg',
+                'y (28).jpeg',
+                'y (29).jpeg',
+                'y (30).jpeg',
+                'y (31).jpeg',
+                'y (32).jpeg',
+                'y (33).jpeg',
+                'y (34).jpeg',
+                'y (35).jpeg',
+                'y (36).jpeg',
+                'y (37).jpeg',
+                'y (38).jpeg',
+                'y (39).jpeg',
+                'y (40).jpeg',
+                'y (41).jpeg',
+                'y (42).jpeg',
+                'y (43).jpeg',
+                'y (44).jpeg',
+                'y (45).jpeg',
+                'y (46).jpeg',
+                'y (47).jpeg',
+                'y (48).jpeg',
+                'y (49).jpeg',
+                'y (50).jpeg',
+                'y (51).jpeg',
+                'y (52).jpeg',
+                'y (53).jpeg',
+                'y (54).jpeg',
+                'y (55).jpeg',
+                'y (56).jpeg',
+                'y (57).jpeg',
+                'y (58).jpeg',
+                'y (59).jpeg',
+                'y (60).jpeg',
+                'y (61).jpeg',
+                'y (62).jpeg',
+                'y (63).jpeg',
+                'y (64).jpeg',
+                'y (65).jpeg',
+                'y (66).jpeg',
+                'y (67).jpeg',
+                'y (68).jpeg',
+                'y (69).jpeg',
+                'y (70).jpeg',
+                'y (71).jpeg',
+                'y (72).jpeg',
+                'y (73).jpeg',
+                'y (74).jpeg',
+                'y (75).jpeg',
+                'y (76).jpeg',
+                'y (77).jpeg',
+                'y (78).jpeg',
+                'y (79).jpeg',
+                'y (80).jpeg',
+                'y (81).jpeg',
+                'y (82).jpeg',
+                'y (83).jpeg',
+                'y (84).jpeg',
+                'y (85).jpeg',
+                'y (86).jpeg',
+                'y (87).jpeg',
+                'y (88).jpeg',
+                'y (89).jpeg',
+                'y (90).jpeg',
+                'y (91).jpeg',
+                'y (92).jpeg',
+                'y (93).jpeg',
+                'y (94).jpeg',
+                'y (95).jpeg',
+                'y (96).jpeg',
+                'y (97).jpeg',
+                'y (98).jpeg',
+                'y (99).jpeg',
+                'y (100).jpeg',
+                'y (101).jpeg',
+                'y (102).jpeg',
+                'y (103).jpeg',
+                'y (104).jpeg',
+                'y (105).jpeg',
+                'y (106).jpeg',
+                'y (107).jpeg'
+        ]
+
+        // Button images (update these paths)
+        const allButtonImages = 
+        [
+            'images/buttons-y/1.png',
+            'images/buttons-y/2.png',
+            'images/buttons-y/3.png',
+            'images/buttons-y/4.png',
+            'images/buttons-y/5.png',
+            'images/buttons-y/6.png',
+            'images/buttons-y/7.png',
+            'images/buttons-y/8.png',
+            'images/buttons-y/9.png',
+            'images/buttons-y/10.png',
+            'images/buttons-y/11.png',
+            'images/buttons-y/12.png',
+            'images/buttons-y/13.png',
+            'images/buttons-y/14.png',
+            'images/buttons-y/15.png',
+            'images/buttons-y/16.png',
+            'images/buttons-y/17.png',
+            'images/buttons-y/18.png',
+            'images/buttons-y/19.png',
+            'images/buttons-y/20.png',
+            'images/buttons-y/21.png',
+            'images/buttons-y/22.png',
+            'images/buttons-y/23.png',
+            'images/buttons-y/24.png',
+            'images/buttons-y/25.png',
+            'images/buttons-y/26.png',
+            'images/buttons-y/27.png',
+            'images/buttons-y/28.png'
+        ];
+
+        // Custom links for each button image (one to one with allButtonImages)
+        const buttonLinks = [
+            'poemyellow.html?poem=poem1','poemyellow.html?poem=poem2','poemyellow.html?poem=poem3','poemyellow.html?poem=poem4',
+            'poemyellow.html?poem=poem5','poemyellow.html?poem=poem6','poemyellow.html?poem=poem7','poemyellow.html?poem=poem8',
+            'poemyellow.html?poem=poem9','poemyellow.html?poem=poem10','poemyellow.html?poem=poem11','poemyellow.html?poem=poem12',
+            'poemyellow.html?poem=poem13','poemyellow.html?poem=poem14','poemyellow.html?poem=poem15','poemyellow.html?poem=poem16',
+            'poemyellow.html?poem=poem17','poemyellow.html?poem=poem18','poemyellow.html?poem=poem19','poemyellow.html?poem=poem20',
+            'poemyellow.html?poem=poem21','poemyellow.html?poem=poem22','poemyellow.html?poem=poem23','poemyellow.html?poem=poem24',
+            'poemyellow.html?poem=poem25','poemyellow.html?poem=poem26','poemyellow.html?poem=poem27','poemyellow.html?poem=poem28'
+        ];
+
+        let buttonIndex = 0;
+
+        function createHoverContent() {
+            const hoverDiv = document.createElement('div');
+            hoverDiv.className = 'hover-content';
+            hoverDiv.innerHTML = `
+                <h3 style="margin-bottom: 8px;">Image ${imageCount}</h3>
+                <p>${['Beautiful Memory', 'Special Moment', 'Creative Work'][Math.floor(Math.random()*3)]}</p>
+            `;
+            return hoverDiv;
+        }
+
+        function createGridItem(isButton = false, buttonImage = '', buttonLink = '') {
+            const item = document.createElement('div');
+            item.className = 'grid-item';
+
+            const colSpan = Math.random() > 0.7 ? 2 : 1;
+            const rowSpan = Math.ceil(Math.random() * 2) + 1;
+            const aspectRatio = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
+
+            item.style.gridColumnEnd = `span ${colSpan}`;
+            item.style.gridRowEnd = `span ${rowSpan}`;
+            item.style.backgroundColor = colorThemes[Math.floor(Math.random() * colorThemes.length)];
+
+            if (isButton) {
+                // Wrap the image in an anchor tag with the custom link
+                const link = document.createElement('a');
+                link.href = buttonLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.style.display = 'block';
+                link.style.width = '100%';
+                link.style.height = '100%';
+
+                const img = document.createElement('img');
+                img.src = buttonImage;
+                img.alt = 'Button Image';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+
+                link.appendChild(img);
+                item.appendChild(link);
+            } else {
+                const img = document.createElement('img');
+                const randomImage = customImages[Math.floor(Math.random() * customImages.length)];
+                img.src = `images/yellow/${randomImage}`;
+                img.alt = 'Gallery Image';
+                item.appendChild(img);
+            }
+
+            item.appendChild(createHoverContent());
+            return item;
+        }
+
+        function addImages(count) {
+            const fragment = document.createDocumentFragment();
+            const positions = Array.from({length: count}, (_, i) => i);
+
+            // Shuffle array for random positioning
+            for (let i = positions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [positions[i], positions[j]] = [positions[j], positions[i]];
+            }
+
+            positions.forEach(() => {
+                if (imageCount % 100 === 0) {
+        // Insert the rainbow image
+                    fragment.appendChild(createGridItem(true, 'images/rainbow/rainbow.jpg', 'colors.html'));
+                } 
+                else {
+                    fragment.appendChild(createGridItem());
+         }
+            imageCount++;
+            }); 
+
+            gridContainer.appendChild(fragment);
+        }
+
+        function addButtons() {
+            if (allButtonImages.length === 0) return;
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < 3; i++) {
+                const currentImage = allButtonImages[buttonIndex];
+                const currentLink = buttonLinks[buttonIndex];
+                fragment.appendChild(createGridItem(true, currentImage, currentLink));
+                buttonIndex = (buttonIndex + 1) % allButtonImages.length;
+            }
+            gridContainer.appendChild(fragment);
+        }
+
+        let throttleTimeout;
+        window.addEventListener('scroll', () => {
+            if (!throttleTimeout) {
+                throttleTimeout = setTimeout(() => {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800) {
+                        addImages(12);
+                        addButtons();
+                    }
+                    throttleTimeout = null;
+                }, 200);
+            }
+        });
+
+        // Initial load
+        addImages(40);
+        addButtons();
+    </script>
+</body>
+</html>
+

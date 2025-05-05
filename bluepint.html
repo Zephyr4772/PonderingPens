@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom Image Gallery with Buttons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(100px, 100px);
+            gap: 15px;
+            padding: 30px 5%;
+            grid-auto-flow: dense;
+        }
+
+        .grid-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #2a2a2a;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hover-content {
+            display: none;
+        }
+
+        .grid-item:hover .hover-content {
+            opacity: 1;
+        }
+
+        .grid-item button {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container"></div>
+
+    <script>
+        const gridContainer = document.querySelector('.grid-container');
+        let imageCount = 1;
+        const aspectRatios = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2];
+        const colorThemes = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeead', '#ff9f68'];
+
+        // Regular images
+        const customImages = [
+                'B (1).jpeg',
+                'B (2).jpeg',
+                'B (3).jpeg',
+                'B (4).jpeg',
+                'B (5).jpeg',
+                'B (6).jpeg',
+                'B (7).jpeg',
+                'B (8).jpeg',
+                'B (9).jpeg',
+                'B (10).jpeg',
+                'B (11).jpeg',
+                'B (12).jpeg',
+                'B (13).jpeg',
+                'B (14).jpeg',
+                'B (15).jpeg',
+                'B (16).jpeg',
+                'B (17).jpeg',
+                'B (18).jpeg',
+                'B (19).jpeg',
+                'B (20).jpeg',
+                'B (21).jpeg',
+                'B (22).jpeg',
+                'B (23).jpeg',
+                'B (24).jpeg',
+                'B (25).jpeg',
+                'B (26).jpeg',
+                'B (27).jpeg',
+                'B (28).jpeg',
+                'B (29).jpeg',
+                'B (30).jpeg',
+                'B (31).jpeg',
+                'B (32).jpeg',
+                'B (33).jpeg',
+                'B (34).jpeg',
+                'B (35).jpeg',
+                'B (36).jpeg',
+                'B (37).jpeg',
+                'B (38).jpeg',
+                'B (39).jpeg',
+                'B (40).jpeg',
+                'B (41).jpeg',
+                'B (42).jpeg',
+                'B (43).jpeg',
+                'B (44).jpeg',
+                'B (45).jpeg',
+                'B (46).jpeg',
+                'B (47).jpeg',
+                'B (48).jpeg',
+                'B (49).jpeg',
+                'B (50).jpeg',
+                'B (51).jpeg',
+                'B (52).jpeg',
+                'B (53).jpeg',
+                'B (54).jpeg',
+                'B (55).jpeg',
+                'B (56).jpeg',
+                'B (57).jpeg',
+                'B (58).jpeg',
+                'B (59).jpeg',
+                'B (60).jpeg',
+                'B (61).jpeg',
+                'B (62).jpeg',
+                'B (63).jpeg',
+                'B (64).jpeg',
+                'B (65).jpeg',
+                'B (66).jpeg',
+                'B (67).jpeg',
+                'B (68).jpeg',
+                'B (69).jpeg',
+                'B (70).jpeg',
+                'B (71).jpeg',
+                'B (72).jpeg',
+                'B (73).jpeg',
+                'B (74).jpeg',
+                'B (75).jpeg',
+                'B (76).jpeg',
+                'B (77).jpeg',
+                'B (78).jpeg',
+                'B (79).jpeg',
+                'B (80).jpeg',
+                'B (81).jpeg',
+                'B (82).jpeg',
+                'B (83).jpeg',
+                'B (84).jpeg',
+                'B (85).jpeg',
+                'B (86).jpeg',
+                'B (87).jpeg',
+                'B (88).jpeg',
+                'B (89).jpeg',
+                'B (90).jpeg',
+                'B (91).jpeg',
+                'B (92).jpeg',
+                'B (93).jpeg',
+                'B (94).jpeg',
+                'B (95).jpeg',
+                'B (96).jpeg',
+                'B (97).jpeg',
+                'B (98).jpeg',
+                'B (99).jpeg',
+                'B (100).jpeg',
+                'B (101).jpeg',
+                'B (102).jpeg',
+                'B (103).jpeg',
+                'B (104).jpeg',
+                'B (105).jpeg',
+                'B (106).jpeg',
+                'B (107).jpeg'
+        ]
+
+        // Button images (update these paths)
+        const allButtonImages = 
+        [
+            'images/buttons-b/1.png',
+            'images/buttons-b/2.png',
+            'images/buttons-b/3.png',
+            'images/buttons-b/4.png',
+            'images/buttons-b/5.png',
+            'images/buttons-b/6.png',
+            'images/buttons-b/7.png',
+            'images/buttons-b/8.png',
+            'images/buttons-b/9.png',
+            'images/buttons-b/10.png',
+            'images/buttons-b/11.png',
+            'images/buttons-b/12.png',
+            'images/buttons-b/13.png',
+            'images/buttons-b/14.png',
+            'images/buttons-b/15.png',
+            'images/buttons-b/16.png',
+            'images/buttons-b/17.png',
+            'images/buttons-b/18.png',
+            'images/buttons-b/19.png',
+            'images/buttons-b/20.png',
+            'images/buttons-b/21.png',
+            'images/buttons-b/22.png',
+            'images/buttons-b/23.png',
+            'images/buttons-b/24.png',
+            'images/buttons-b/25.png',
+            'images/buttons-b/26.png',
+            'images/buttons-b/27.png',
+            'images/buttons-b/28.png',
+        ];
+
+        // Custom links for each button image (one to one with allButtonImages)
+        const buttonLinks = [
+        'poemblue.html?poem=poem1','poemblue.html?poem=poem2','poemblue.html?poem=poem3','poemblue.html?poem=poem4',
+            'poemblue.html?poem=poem5','poemblue.html?poem=poem6','poemblue.html?poem=poem7','poemblue.html?poem=poem8',
+            'poemblue.html?poem=poem9','poemblue.html?poem=poem10','poemblue.html?poem=poem11','poemblue.html?poem=poem12',
+            'poemblue.html?poem=poem13','poemblue.html?poem=poem14','poemblue.html?poem=poem15','poemblue.html?poem=poem16',
+            'poemblue.html?poem=poem17','poemblue.html?poem=poem18','poemblue.html?poem=poem19','poemblue.html?poem=poem20',
+            'poemblue.html?poem=poem21','poemblue.html?poem=poem22','poemblue.html?poem=poem23','poemblue.html?poem=poem24',
+            'poemblue.html?poem=poem25','poemblue.html?poem=poem26','poemblue.html?poem=poem27','poemblue.html?poem=poem28'
+        ];
+
+        let buttonIndex = 0;
+
+        function createHoverContent() {
+            const hoverDiv = document.createElement('div');
+            hoverDiv.className = 'hover-content';
+            hoverDiv.innerHTML = `
+                <h3 style="margin-bottom: 8px;">Image ${imageCount}</h3>
+                <p>${['Beautiful Memory', 'Special Moment', 'Creative Work'][Math.floor(Math.random()*3)]}</p>
+            `;
+            return hoverDiv;
+        }
+
+        function createGridItem(isButton = false, buttonImage = '', buttonLink = '') {
+            const item = document.createElement('div');
+            item.className = 'grid-item';
+
+            const colSpan = Math.random() > 0.7 ? 2 : 1;
+            const rowSpan = Math.ceil(Math.random() * 2) + 1;
+            const aspectRatio = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
+
+            item.style.gridColumnEnd = `span ${colSpan}`;
+            item.style.gridRowEnd = `span ${rowSpan}`;
+            item.style.backgroundColor = colorThemes[Math.floor(Math.random() * colorThemes.length)];
+
+            if (isButton) {
+                // Wrap the image in an anchor tag with the custom link
+                const link = document.createElement('a');
+                link.href = buttonLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.style.display = 'block';
+                link.style.width = '100%';
+                link.style.height = '100%';
+
+                const img = document.createElement('img');
+                img.src = buttonImage;
+                img.alt = 'Button Image';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+
+                link.appendChild(img);
+                item.appendChild(link);
+            } else {
+                const img = document.createElement('img');
+                const randomImage = customImages[Math.floor(Math.random() * customImages.length)];
+                img.src = `images/blue/${randomImage}`;
+                img.alt = 'Gallery Image';
+                item.appendChild(img);
+            }
+
+            item.appendChild(createHoverContent());
+            return item;
+        }
+
+        function addImages(count) {
+            const fragment = document.createDocumentFragment();
+            const positions = Array.from({length: count}, (_, i) => i);
+
+            // Shuffle array for random positioning
+            for (let i = positions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [positions[i], positions[j]] = [positions[j], positions[i]];
+            }
+
+            positions.forEach(() => {
+                if (imageCount % 100 === 0) {
+        // Insert the rainbow image
+                    fragment.appendChild(createGridItem(true, 'images/rainbow/rainbow.jpg', 'colors.html'));
+                } 
+                else {
+                    fragment.appendChild(createGridItem());
+         }
+            imageCount++;
+            });
+
+            gridContainer.appendChild(fragment);
+        }
+
+        function addButtons() {
+            if (allButtonImages.length === 0) return;
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < 3; i++) {
+                const currentImage = allButtonImages[buttonIndex];
+                const currentLink = buttonLinks[buttonIndex];
+                fragment.appendChild(createGridItem(true, currentImage, currentLink));
+                buttonIndex = (buttonIndex + 1) % allButtonImages.length;
+            }
+            gridContainer.appendChild(fragment);
+        }
+
+        let throttleTimeout;
+        window.addEventListener('scroll', () => {
+            if (!throttleTimeout) {
+                throttleTimeout = setTimeout(() => {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800) {
+                        addImages(12);
+                        addButtons();
+                    }
+                    throttleTimeout = null;
+                }, 200);
+            }
+        });
+
+        // Initial load
+        addImages(10);
+        addButtons();
+    </script>
+</body>
+</html>
+

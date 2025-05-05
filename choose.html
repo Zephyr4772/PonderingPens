@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Two Button Page</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000000;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 40px;
+    }
+
+    a.inspired-link {
+      text-decoration: none;
+    }
+
+    button.inspired {
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background-color: #000;
+      color: #fff;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button.inspired:focus,
+    button.inspired:hover {
+      background-color: #ffffff;
+      color: #111111;
+      border-color: #cccccc;
+      box-shadow:
+        0 0 40px #cccccc,
+        0 0 60px #dddddd,
+        0 0 80px #eeeeee;
+      text-shadow:
+        0 0 8px #ffffff,
+        0 0 20px #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="button-container">
+    <a href="colors.html" class="inspired-link">
+      <button class="inspired">Journey</button>
+    </a>
+    <a href="direct.html" class="inspired-link">
+      <button class="inspired">Direct</button>
+    </a>
+  </div>
+</body>
+</html>

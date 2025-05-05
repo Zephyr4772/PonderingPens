@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Mood Landing - Neon Vibes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: #000000;
+    font-family: 'Audiowide', cursive, monospace;
+    color: #111;
+    user-select: none;
+  }
+
+  body {
+    display: flex;
+    flex-direction: row;
+    height: 600px;
+    width: 100vw;
+  }
+
+  button.mood-btn {
+    position: relative;
+    flex: 1 1 0;
+    height: 100%;
+    width: auto;
+    border: 2px solid transparent;
+    background-color: #000000;
+    color: #222;
+    font-size: 2.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, text-shadow 0.35s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: none;
+    border-radius: 0;
+    padding: 0;
+    outline-offset: 4px;
+
+    /* Make text vertical */
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  button.mood-btn:focus-visible {
+    outline: 4px solid #fff;
+    outline-offset: 4px;
+  }
+
+  /* span text for placeholder */
+  button.mood-btn span.placeholder-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    text-shadow:
+      0 0 6px #fff,
+      0 0 10px #fff;
+    transition: opacity 0.35s ease;
+    user-select: none;
+  }
+
+  /* show text on hover/focus */
+  button.mood-btn:hover span.placeholder-text,
+  button.mood-btn:focus span.placeholder-text {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Mood neon colors below */
+  /* Base states: dimmed neon colors for text & border*/
+  button.happy {
+    color: #7a6f00; /* dimmed neon yellow */
+    border-color: transparent;
+  }
+  button.sad {
+    color: #0a2f8a; /* dimmed neon blue */
+    border-color: transparent;
+  }
+  button.energetic {
+    color: #7a0025; /* dimmed neon magenta */
+    border-color: transparent;
+  }
+  button.calm {
+    color: #005959; /* dimmed neon cyan */
+    border-color: transparent;
+  }
+  button.inspired {
+    color: #4b007a; /* dimmed neon purple */
+    border-color: transparent;
+  }
+  button.tired {
+    color: #3c6c2e; /* dimmed neon green */
+    border-color: transparent;
+  }
+
+  /* On hover - neon background fill with glowing border*/
+  button.happy:hover,
+  button.happy:focus {
+    background-color: #fff320;
+    color: #000000;
+    border-color: #fff320;
+    box-shadow:
+      0 0 8px #fff320,
+      0 0 20px #fff320,
+      0 0 40px #fff320;
+    text-shadow:
+      0 0 8px #fff320,
+      0 0 20px #fff320;
+  }
+  button.sad:hover,
+  button.sad:focus {
+    background-color: #1e90ff;
+    color: #000000;
+    border-color: #1e90ff;
+    box-shadow:
+      0 0 8px #1e90ff,
+      0 0 20px #1e90ff,
+      0 0 40px #1e90ff;
+    text-shadow:
+      0 0 8px #1e90ff,
+      0 0 20px #1e90ff;
+  }
+  button.energetic:hover,
+  button.energetic:focus {
+    background-color: #ff1493;
+    color: #000000;
+    border-color: #ff1493;
+    box-shadow:
+      0 0 8px #ff1493,
+      0 0 20px #ff1493,
+      0 0 40px #ff1493;
+    text-shadow:
+      0 0 8px #ff1493,
+      0 0 20px #ff1493;
+  }
+  button.calm:hover,
+  button.calm:focus {
+    background-color: #ffffff;
+  color: #111111;
+  border-color: #cccccc;
+  box-shadow:
+    0 0 8px #cccccc,
+    0 0 20px #dddddd,
+    0 0 40px #eeeeee;
+  text-shadow:
+    0 0 8px #ffffff,
+    0 0 20px #ffffff;
+  }
+  button.inspired:hover,
+  button.inspired:focus {
+    background-color: #9400d3;
+    color: #000000;
+    border-color: #9400d3;
+    box-shadow:
+      0 0 8px #9400d3,
+      0 0 20px #9400d3,
+      0 0 40px #9400d3;
+    text-shadow:
+      0 0 8px #9400d3,
+      0 0 20px #9400d3;
+  }
+  button.tired:hover,
+  button.tired:focus {
+    background-color: #32cd32;
+    color: #000000;
+    border-color: #32cd32;
+    box-shadow:
+      0 0 8px #32cd32,
+      0 0 20px #32cd32,
+      0 0 40px #32cd32;
+    text-shadow:
+      0 0 8px #32cd32,
+      0 0 20px #32cd32;
+  }
+
+  /* Responsive font size for small screens */
+  @media(max-width: 380px) {
+    button.mood-btn {
+      font-size: 1.7rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <button class="mood-btn happy" data-url="yellowpint.html" aria-label="Happy mood"><span class="placeholder-text">HOPE</span></button>
+  <button class="mood-btn sad" data-url="bluepint.html" aria-label="Sad mood"><span class="placeholder-text">SOLITUDE</span></button>
+  <button class="mood-btn energetic" data-url="redpint.html" aria-label="Energetic mood"><span class="placeholder-text">LOVE</span></button>
+  <button class="mood-btn calm" data-url="white.html" aria-label="Calm mood"><span class="placeholder-text">DREAMS</span></button>
+  <button class="mood-btn tired" data-url="greenpint.html" aria-label="Tired mood"><span class="placeholder-text">LIFE</span></button>
+
+  <script>
+    document.querySelectorAll('.mood-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-url');
+        if (url) {
+          window.location.href = url;
+        }
+      });
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

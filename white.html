@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Custom Image Gallery with Buttons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: minmax(100px, 100px);
+            gap: 15px;
+            padding: 30px 5%;
+            grid-auto-flow: dense;
+        }
+
+        .grid-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #2a2a2a;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+            border: 3px solid white;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hover-content {
+            display: none;
+        }
+
+        .grid-item:hover .hover-content {
+            opacity: 1;
+        }
+
+        .grid-item button {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container"></div>
+
+    <script>
+        const gridContainer = document.querySelector('.grid-container');
+        let imageCount = 1;
+        const aspectRatios = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2];
+        const colorThemes = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeead', '#ff9f68'];
+
+        // Regular images
+        const customImages = [
+                'w (1).jpeg',
+                'w (2).jpeg',
+                'w (3).jpeg',
+                'w (4).jpeg',
+                'w (5).jpeg',
+                'w (6).jpeg',
+                'w (7).jpeg',
+                'w (8).jpeg',
+                'w (9).jpeg',
+                'w (10).jpeg',
+                'w (11).jpeg',
+                'w (12).jpeg',
+                'w (13).jpeg',
+                'w (14).jpeg',
+                'w (15).jpeg',
+                'w (16).jpeg',
+                'w (17).jpeg',
+                'w (18).jpeg',
+                'w (19).jpeg',
+                'w (20).jpeg',
+                'w (21).jpeg',
+                'w (22).jpeg',
+                'w (23).jpeg',
+                'w (24).jpeg',
+                'w (25).jpeg',
+                'w (26).jpeg',
+                'w (27).jpeg',
+                'w (28).jpeg',
+                'w (29).jpeg',
+                'w (30).jpeg',
+                'w (31).jpeg',
+                'w (32).jpeg',
+                'w (33).jpeg',
+                'w (34).jpeg',
+                'w (35).jpeg',
+                'w (36).jpeg',
+                'w (37).jpeg',
+                'w (38).jpeg',
+                'w (39).jpeg',
+                'w (40).jpeg',
+                'w (41).jpeg',
+                'w (42).jpeg',
+                'w (43).jpeg',
+                'w (44).jpeg',
+                'w (45).jpeg',
+                'w (46).jpeg',
+                'w (47).jpeg',
+                'w (48).jpeg',
+                'w (49).jpeg',
+                'w (50).jpeg',
+                'w (51).jpeg',
+                'w (52).jpeg',
+                'w (53).jpeg',
+                'w (54).jpeg',
+                'w (55).jpeg',
+                'w (56).jpeg',
+                'w (57).jpeg',
+                'w (58).jpeg',
+                'w (59).jpeg',
+                'w (60).jpeg',
+                'w (61).jpeg',
+                'w (62).jpeg',
+                'w (63).jpeg',
+                'w (64).jpeg',
+                'w (65).jpeg',
+                'w (66).jpeg',
+                'w (67).jpeg',
+                'w (68).jpeg',
+                'w (69).jpeg',
+                'w (70).jpeg',
+                'w (71).jpeg',
+                'w (72).jpeg',
+                'w (73).jpeg',
+                'w (74).jpeg',
+                'w (75).jpeg',
+                'w (76).jpeg',
+                'w (77).jpeg',
+                'w (78).jpeg',
+                'w (79).jpeg',
+                'w (80).jpeg',
+                'w (81).jpeg',
+                'w (82).jpeg',
+                'w (83).jpeg',
+                'w (84).jpeg',
+                'w (85).jpeg',
+                'w (86).jpeg',
+                'w (87).jpeg',
+                'w (88).jpeg',
+                'w (89).jpeg',
+                'w (90).jpeg',
+                'w (91).jpeg',
+                'w (92).jpeg',
+                'w (93).jpeg',
+                'w (94).jpeg',
+                'w (95).jpeg',
+                'w (96).jpeg',
+                'w (97).jpeg',
+                'w (98).jpeg',
+                'w (99).jpeg',
+                'w (100).jpeg',
+                'w (101).jpeg',
+                'w (102).jpeg',
+                'w (103).jpeg',
+                'w (104).jpeg',
+                'w (105).jpeg',
+                'w (106).jpeg',
+                'w (107).jpeg',
+                'w (108).jpeg',
+                'w (109).jpeg',
+                'w (110).jpeg',
+                'w (111).jpeg',
+                'w (112).jpeg'
+        ]
+
+        // Button images (update these paths)
+        const allButtonImages = 
+        [
+            'images/buttons-w/1.png',
+            'images/buttons-w/2.png',
+            'images/buttons-w/3.png',
+            'images/buttons-w/4.png',
+            'images/buttons-w/5.png',
+            'images/buttons-w/6.png',
+            'images/buttons-w/7.png',
+            'images/buttons-w/8.png',
+            'images/buttons-w/9.png',
+            'images/buttons-w/10.png',
+            'images/buttons-w/11.png',
+            'images/buttons-w/12.png',
+            'images/buttons-w/13.png',
+            'images/buttons-w/14.png',
+            'images/buttons-w/15.png',
+            'images/buttons-w/16.png',
+            'images/buttons-w/17.png',
+            'images/buttons-w/18.png',
+            'images/buttons-w/19.png',
+            'images/buttons-w/20.png',
+            'images/buttons-w/21.png',
+            'images/buttons-w/22.png',
+            'images/buttons-w/23.png',
+            'images/buttons-w/24.png',
+            'images/buttons-w/25.png',
+            'images/buttons-w/26.png',
+            'images/buttons-w/27.png',
+            'images/buttons-w/28.png',
+        ];
+
+        // Custom links for each button image (one to one with allButtonImages)
+        const buttonLinks = [
+            'poemwhite.html?poem=poem1','poemwhite.html?poem=poem2','poemwhite.html?poem=poem3','poemwhite.html?poem=poem4',
+            'poemwhite.html?poem=poem5','poemwhite.html?poem=poem6','poemwhite.html?poem=poem7','poemwhite.html?poem=poem8',
+            'poemwhite.html?poem=poem9','poemwhite.html?poem=poem10','poemwhite.html?poem=poem11','poemwhite.html?poem=poem12',
+            'poemwhite.html?poem=poem13','poemwhite.html?poem=poem14','poemwhite.html?poem=poem15','poemwhite.html?poem=poem16',
+            'poemwhite.html?poem=poem17','poemwhite.html?poem=poem18','poemwhite.html?poem=poem19','poemwhite.html?poem=poem20',
+            'poemwhite.html?poem=poem21','poemwhite.html?poem=poem22','poemwhite.html?poem=poem23','poemwhite.html?poem=poem24',
+            'poemwhite.html?poem=poem25','poemwhite.html?poem=poem26','poemwhite.html?poem=poem27','poemwhite.html?poem=poem28'
+        ];
+
+        let buttonIndex = 0;
+
+        function createHoverContent() {
+            const hoverDiv = document.createElement('div');
+            hoverDiv.className = 'hover-content';
+            hoverDiv.innerHTML = `
+                <h3 style="margin-bottom: 8px;">Image ${imageCount}</h3>
+                <p>${['Beautiful Memory', 'Special Moment', 'Creative Work'][Math.floor(Math.random()*3)]}</p>
+            `;
+            return hoverDiv;
+        }
+
+        function createGridItem(isButton = false, buttonImage = '', buttonLink = '') {
+            const item = document.createElement('div');
+            item.className = 'grid-item';
+
+            const colSpan = Math.random() > 0.7 ? 2 : 1;
+            const rowSpan = Math.ceil(Math.random() * 2) + 1;
+            const aspectRatio = aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
+
+            item.style.gridColumnEnd = `span ${colSpan}`;
+            item.style.gridRowEnd = `span ${rowSpan}`;
+            item.style.backgroundColor = colorThemes[Math.floor(Math.random() * colorThemes.length)];
+
+            if (isButton) {
+                // Wrap the image in an anchor tag with the custom link
+                const link = document.createElement('a');
+                link.href = buttonLink;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.style.display = 'block';
+                link.style.width = '100%';
+                link.style.height = '100%';
+
+                const img = document.createElement('img');
+                img.src = buttonImage;
+                img.alt = 'Button Image';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+
+                link.appendChild(img);
+                item.appendChild(link);
+            } else {
+                const img = document.createElement('img');
+                const randomImage = customImages[Math.floor(Math.random() * customImages.length)];
+                img.src = `images/white/${randomImage}`;
+                img.alt = 'Gallery Image';
+                item.appendChild(img);
+            }
+
+            item.appendChild(createHoverContent());
+            return item;
+        }
+
+        function addImages(count) {
+            const fragment = document.createDocumentFragment();
+            const positions = Array.from({length: count}, (_, i) => i);
+
+            // Shuffle array for random positioning
+            for (let i = positions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [positions[i], positions[j]] = [positions[j], positions[i]];
+            }
+
+            positions.forEach(() => {
+                if (imageCount % 100 === 0) {
+        // Insert the rainbow image
+                    fragment.appendChild(createGridItem(true, 'images/rainbow/rainbow.jpg', 'colors.html'));
+                } 
+                else {
+                    fragment.appendChild(createGridItem());
+         }
+            imageCount++;
+            });
+
+            gridContainer.appendChild(fragment);
+        }
+
+        function addButtons() {
+            if (allButtonImages.length === 0) return;
+
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < 3; i++) {
+                const currentImage = allButtonImages[buttonIndex];
+                const currentLink = buttonLinks[buttonIndex];
+                fragment.appendChild(createGridItem(true, currentImage, currentLink));
+                buttonIndex = (buttonIndex + 1) % allButtonImages.length;
+            }
+            gridContainer.appendChild(fragment);
+        }
+
+        let throttleTimeout;
+        window.addEventListener('scroll', () => {
+            if (!throttleTimeout) {
+                throttleTimeout = setTimeout(() => {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800) {
+                        addImages(12);
+                        addButtons();
+                    }
+                    throttleTimeout = null;
+                }, 200);
+            }
+        });
+
+        // Initial load
+        addImages(40);
+        addButtons();
+    </script>
+</body>
+</html>
+

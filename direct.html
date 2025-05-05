@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>PONDERING PENS - Scrollable Cards</title>
+    <style>
+        /* From Uiverse.io by eduardo-amaro-maciel */ 
+        body {
+            margin: 0;
+            height: 100vh; /* Full height of the viewport */
+            overflow: hidden; /* Prevent scrolling */
+            background-color: #121212; /* Background color for the body */
+        }
+
+        .scroll-1::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .scroll-1::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            background: #888;
+        }
+
+        .container * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            overflow-x: scroll;
+            padding: 0; /* Remove padding */
+            width: 100%; /* Full width */
+            height: 100vh; /* Full height */
+            scroll-snap-type: x mandatory;
+            scroll-padding-top: 0; /* Remove padding */
+            border-radius: 0; /* Remove border radius */
+            gap: 0; /* Remove gap */
+        }
+
+        .container .card {
+            flex: 0 0 100%; /* Each card takes full width */
+            overflow: hidden;
+            border-radius: 0; /* Remove border radius */
+            background-color: #141414;
+            scroll-snap-align: start;
+            height: 100vh; /* Each card takes full height */
+        }
+
+        .card .card__image {
+            flex: 1;
+            height: 60%; /* Adjust height as needed */
+        }
+
+        .card:nth-child(1) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #051937, 
+                #004d7a, 
+                #008793, 
+                #00bf72, 
+                #a8eb12
+            );
+        }
+
+        .card:nth-child(2) .card__image {
+            background-image: linear-gradient(
+                to right top, 
+                #dc09a5, 
+                #ce00b4, 
+                #ba00c5, 
+                #9c00d8, 
+                #6f12eb
+            );
+        }
+
+        .card:nth-child(3) .card__image {
+            background-image: linear-gradient(
+                to right top, 
+                #dc1009, 
+                #e55f00, 
+                #e49200, 
+                #dac000, 
+                #c7eb12
+            );
+        }
+
+        .card:nth-child(4) .card__image {
+            background-image: linear-gradient(
+                to right top, 
+                #00c6ff, 
+                #0072ff
+            );
+        }
+
+        .card:nth-child(5) .card__image {
+            background-image: linear-gradient(
+                to right top, 
+                #ff512f, 
+                #dd2476
+            );
+        }
+
+        .card:nth-child(6) .card__image {
+            background-image: linear-gradient(
+                to right top, 
+                #ffafbd, 
+                #ffc3a0
+            );
+        }
+
+        .card:nth-child(7) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #ff6b6b,
+                #ff8e8e,
+                #ff9f9f
+            );
+        }
+
+        .card:nth-child(8) .card__image {
+            background-image: linear-gradient(
+                to left top,
+                #7a1b9e,
+                #9c27b0,
+                #c2185b
+            );
+        }
+
+        .card:nth-child(9) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #1e3c72,
+                #2a5298,
+                #3b6cd8
+            );
+        }
+
+        .card:nth-child(10) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #1a1a1a,
+                #4a4a4a,
+                #8a8a8a
+            );
+        }
+
+        .card:nth-child(11) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #b39d98,
+                #d18873,
+                #f7c6c6
+            );
+        }
+
+        .card:nth-child(12) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #9c27b0,
+                #e91e63,
+                #f44336
+            );
+        }
+
+        .card:nth-child(13) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #00b894,
+                #00cec9,
+                #98fb98
+            );
+        }
+
+        .card:nth-child(14) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #1a1a1a,
+                #2c3e50,
+                #3498db
+            );
+        }
+
+        .card:nth-child(15) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #a8edea,
+                #fed6e3,
+                #fda085
+            );
+        }
+
+        .card:nth-child(16) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #d1c4e9,
+                #c5cae9,
+                #b3d6ff
+            );
+        }
+
+        .card:nth-child(17) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #f48fb1,
+                #f0ad4e,
+                #cc9900
+            );
+        }
+
+        .card:nth-child(18) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #e0e0e0,
+                #d1d1d1,
+                #c2c2c2
+            );
+        }
+
+        .card:nth-child(19) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #9e9e9e,
+                #707070,
+                #404040
+            );
+        }
+
+        .card:nth-child(20) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #f0f2f0,
+                #f0f0f0,
+                #e0e0e0
+            );
+        }
+
+        .card:nth-child(21) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #f6d365,
+                #fda085,
+                #ff6b6b
+            );
+        }
+
+        .card:nth-child(22) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #4ecdc4,
+                #45b7d1,
+                #3b8fd8
+            );
+        }
+
+        .card:nth-child(23) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #96ceb4,
+                #ffeead,
+                #ff9999
+            );
+        }
+
+        .card:nth-child(24) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #d4a5a5,
+                #c0392b,
+                #8e44ad
+            );
+        }
+
+        .card:nth-child(25) .card__image {
+            background-image: linear-gradient(
+                to right top,
+                #ff9a9e,
+                #fad0c4,
+                #fad0c4
+            );
+        }
+
+        .card:nth-child(26) .card__image {
+            background-image: linear-gradient(
+                to right,
+                #a1c4fd,
+                #c2e9fb,
+                #f1f9ff
+            );
+        }
+
+        .card .card__content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            height: 40%; /* Adjust height as needed */
+            position: relative; /* Add this for button positioning */
+        }
+
+        .card .card__content .card__title {
+            font-size: 90px;
+            color: #fff;
+            text-transform: capitalize;
+        }
+
+        .card .card__content .card__describe {
+            color: #fff;
+            font-size: 40px;
+        }
+
+        .card-button {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            padding: 8px 16px;
+            background-color: #2a2a2a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .card-button:hover {
+            background-color: #3a3a3a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container scroll-1">
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Fool's Love</span>
+                <p class="card__describe">A fantasy of forever and a broken promise,who knew forever wasnt a lifetime</p>
+                <button class="card-button" onclick="location.href='#1'">READ</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Hill That Weeps At Dawn</span>
+                <p class="card__describe">A ghost of my past and the bitter fate of love</p>
+                <button class="card-button" onclick="location.href='#2'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Duality Of Men</span>
+                <p class="card__describe">why do i fall in love with every woman that gives me the least bit of attention</p>
+                <button class="card-button" onclick="location.href='#3'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">A Grave Of Forever</span>
+                <p class="card__describe">maybe she'll love me if i never stop loving her</p>
+                <button class="card-button" onclick="location.href='#4'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">The Oceans Between Us</span>
+                <p class="card__describe">the bliss in drowning for the love of waves</p>
+                <button class="card-button" onclick="location.href='#5'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 6</span>
+                <p class="card__describe">Description for Card 6.</p>
+                <button class="card-button" onclick="location.href='#6'">View More</button>
+            </div>
+        </div>
+        <!-- Added 20 more cards -->
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 7</span>
+                <p class="card__describe">Description for Card 7.</p>
+                <button class="card-button" onclick="location.href='#7'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 8</span>
+                <p class="card__describe">Description for Card 8.</p>
+                <button class="card-button" onclick="location.href='#8'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 9</span>
+                <p class="card__describe">Description for Card 9.</p>
+                <button class="card-button" onclick="location.href='#9'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 10</span>
+                <p class="card__describe">Description for Card 10.</p>
+                <button class="card-button" onclick="location.href='#10'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 11</span>
+                <p class="card__describe">Description for Card 11.</p>
+                <button class="card-button" onclick="location.href='#11'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 12</span>
+                <p class="card__describe">Description for Card 12.</p>
+                <button class="card-button" onclick="location.href='#12'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 13</span>
+                <p class="card__describe">Description for Card 13.</p>
+                <button class="card-button" onclick="location.href='#13'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 14</span>
+                <p class="card__describe">Description for Card 14.</p>
+                <button class="card-button" onclick="location.href='#14'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 15</span>
+                <p class="card__describe">Description for Card 15.</p>
+                <button class="card-button" onclick="location.href='#15'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 16</span>
+                <p class="card__describe">Description for Card 16.</p>
+                <button class="card-button" onclick="location.href='#16'">View More</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card__image"></div>
+            <div class="card__content">
+                <span class="card__title">Card 17</span>
+                <p class="card__describe">Description for Card 17.</p>
+                <button class="card-button" onclick="location.href='#17'">View More</button>
+            </div>
+        </div>
+        <
