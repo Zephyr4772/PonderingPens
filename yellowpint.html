@@ -87,7 +87,7 @@
         const aspectRatios = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2];
         const colorThemes = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeead', '#ff9f68'];
 
-        // Regular images
+        
         const customImages = [
                 'y (1).jpeg',
                 'y (2).jpeg',
@@ -198,7 +198,7 @@
                 'y (107).jpeg'
         ]
 
-        // Button images (update these paths)
+        
         const allButtonImages = 
         [
             'images/buttons-y/1.png',
@@ -231,7 +231,6 @@
             'images/buttons-y/28.png'
         ];
 
-        // Custom links for each button image (one to one with allButtonImages)
         const buttonLinks = [
             'poemyellow.html?poem=poem1','poemyellow.html?poem=poem2','poemyellow.html?poem=poem3','poemyellow.html?poem=poem4',
             'poemyellow.html?poem=poem5','poemyellow.html?poem=poem6','poemyellow.html?poem=poem7','poemyellow.html?poem=poem8',
@@ -267,7 +266,7 @@
             item.style.backgroundColor = colorThemes[Math.floor(Math.random() * colorThemes.length)];
 
             if (isButton) {
-                // Wrap the image in an anchor tag with the custom link
+                
                 const link = document.createElement('a');
                 link.href = buttonLink;
                 link.target = '_blank';
@@ -301,7 +300,7 @@
             const fragment = document.createDocumentFragment();
             const positions = Array.from({length: count}, (_, i) => i);
 
-            // Shuffle array for random positioning
+            
             for (let i = positions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [positions[i], positions[j]] = [positions[j], positions[i]];
@@ -309,7 +308,7 @@
 
             positions.forEach(() => {
                 if (imageCount % 100 === 0) {
-        // Insert the rainbow image
+        
                     fragment.appendChild(createGridItem(true, 'images/rainbow/rainbow.jpg', 'colors.html'));
                 } 
                 else {
@@ -347,7 +346,7 @@
             }
         });
 
-        // Initial load
+        
         addImages(40);
         addButtons();
     </script>

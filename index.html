@@ -17,7 +17,7 @@
       background-color: #0a0a0a;
       font-family: 'Playfair Display', serif;
       color: white;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .overlay {
@@ -27,12 +27,14 @@
       transform: translate(-50%, -50%);
       text-align: center;
       z-index: 10;
+      padding: 10px;
     }
 
     h1 {
-      font-size: 3.45rem;
+      font-size: 3.3rem;
       margin-bottom: 20px;
       color: white;
+      white-space: nowrap;
     }
 
     .start-button {
@@ -123,6 +125,7 @@
       height: 300px;
       object-fit: cover;
       display: block;
+      background-color: #000;
     }
 
     @keyframes scroll {
@@ -136,7 +139,7 @@
 
     .bottom-links {
       position: fixed;
-      bottom: 0.2px;
+      bottom: 5px;
       left: 50%;
       transform: translateX(-50%);
       width: max-content;
@@ -149,14 +152,71 @@
     .bottom-links a {
       color: #ffffff;
       text-decoration: none;
-      margin: 0 18px;;
+      margin: 0 12px;
       display: inline-flex;
       align-items: center;
-      gap: 40px;
+      gap: 8px;
     }
 
     .bottom-links a:hover {
       text-decoration: underline;
+    }
+
+    /* 🔽 MOBILE FIXES */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+        height: 100vh;
+        gap: 0;
+        padding: 0;
+      }
+
+      .column {
+        border-radius: 0;
+      }
+
+      .column:not(:first-child) {
+        display: none;
+      }
+
+      .image {
+        height: 100vh;
+      }
+
+      .image-container {
+        height: calc(100vh * 8);
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-800vh);
+        }
+      }
+
+      h1 {
+        margin-top: 60px;
+        font-size: 2.4rem;
+      }
+
+      .start-button {
+        margin-top: 10px;
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+
+      .bottom-links {
+        font-size: 0.85rem;
+        padding: 5px;
+        bottom: 2px;
+      }
+
+      .overlay {
+        top: 40%;
+        transform: translate(-50%, -40%);
+      }
     }
   </style>
 </head>
@@ -215,10 +275,10 @@
   </div>
 
   <div class="bottom-links">
-    <a href="https://www.instagram.com/pondering_pens?igsh=MXVvanloMHFncHU1OA==" target="_blank"><i class="fab fa-instagram"></i> </a> ·
-    <a href="https://www.instagram.com/zephyr_4772?igsh=MWNnbHEwM3l4ZmZtbg%3D%3D" target="_blank"><i class="fab fa-instagram"></i> </a> ·
-    <a href="https://www.linkedin.com/in/sinhal-joshi-244603275?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i> </a> ·
-    <a href="https://github.com/Zephyr4772" target="_blank"><i class="fab fa-github"></i> </a>
+    <a href="https://www.instagram.com/pondering_pens" target="_blank"><i class="fab fa-instagram"></i></a> ·
+    <a href="https://www.instagram.com/zephyr_4772" target="_blank"><i class="fab fa-instagram"></i></a> ·
+    <a href="https://www.linkedin.com/in/sinhal-joshi-244603275" target="_blank"><i class="fab fa-linkedin"></i></a> ·
+    <a href="https://github.com/Zephyr4772" target="_blank"><i class="fab fa-github"></i></a>
   </div>
 </body>
 </html>

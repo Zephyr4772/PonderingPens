@@ -193,7 +193,7 @@
                 'g (102).jpeg'
         ];
 
-        // Button images (update these paths)
+        // Button images 
         const allButtonImages = 
         [
             'images/buttons-g/1.png',
@@ -226,7 +226,7 @@
             'images/buttons-g/28.png',
         ];
 
-        // Custom links for each button image (one to one with allButtonImages)
+        // Custom links for each button image
         const buttonLinks = [
             'poemgreen.html?poem=poem1','poemgreen.html?poem=poem2','poemgreen.html?poem=poem3','poemgreen.html?poem=poem4',
             'poemgreen.html?poem=poem5','poemgreen.html?poem=poem6','poemgreen.html?poem=poem7','poemgreen.html?poem=poem8',
@@ -262,7 +262,6 @@
             item.style.backgroundColor = colorThemes[Math.floor(Math.random() * colorThemes.length)];
 
             if (isButton) {
-                // Wrap the image in an anchor tag with the custom link
                 const link = document.createElement('a');
                 link.href = buttonLink;
                 link.target = '_blank';
@@ -296,7 +295,7 @@
             const fragment = document.createDocumentFragment();
             const positions = Array.from({length: count}, (_, i) => i);
 
-            // Shuffle array for random positioning
+            //  array for random positioning
             for (let i = positions.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [positions[i], positions[j]] = [positions[j], positions[i]];
@@ -304,7 +303,6 @@
 
             positions.forEach(() => {
                 if (imageCount % 100 === 0) {
-        // Insert the rainbow image
                     fragment.appendChild(createGridItem(true, 'images/rainbow/rainbow.jpg', 'colors.html'));
                 } 
                 else {
@@ -342,9 +340,9 @@
             }
         });
 
-        // Initial load
+     
         addImages(50);
-        addButtons();
+        addButtons(2);
     </script>
 </body>
 </html>

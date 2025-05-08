@@ -203,7 +203,7 @@
                 'w (112).jpeg'
         ]
 
-        // Button images (update these paths)
+        // Button images 
         const allButtonImages = 
         [
             'images/buttons-w/1.png',
@@ -236,7 +236,7 @@
             'images/buttons-w/28.png',
         ];
 
-        // Custom links for each button image (one to one with allButtonImages)
+        // Custom links 
         const buttonLinks = [
             'poemwhite.html?poem=poem1','poemwhite.html?poem=poem2','poemwhite.html?poem=poem3','poemwhite.html?poem=poem4',
             'poemwhite.html?poem=poem5','poemwhite.html?poem=poem6','poemwhite.html?poem=poem7','poemwhite.html?poem=poem8',
@@ -272,7 +272,7 @@
             item.style.backgroundColor = colorThemes[Math.floor(Math.random() * colorThemes.length)];
 
             if (isButton) {
-                // Wrap the image in an anchor tag with the custom link
+              
                 const link = document.createElement('a');
                 link.href = buttonLink;
                 link.target = '_blank';

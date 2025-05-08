@@ -7,7 +7,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
-  /* Reset and base */
+  /*   base */
   * {
     box-sizing: border-box;
   }
@@ -53,7 +53,7 @@
     padding: 0;
     outline-offset: 4px;
 
-    /* Make text vertical */
+    /*  text vertical */
     writing-mode: vertical-rl;
     text-orientation: mixed;
   }
@@ -62,7 +62,7 @@
     outline-offset: 4px;
   }
 
-  /* span text for placeholder */
+  /* span text   */
   button.mood-btn span.placeholder-text {
     position: absolute;
     inset: 0;
@@ -81,41 +81,41 @@
     user-select: none;
   }
 
-  /* show text on hover/focus */
+  /*  text  hover/focus */
   button.mood-btn:hover span.placeholder-text,
   button.mood-btn:focus span.placeholder-text {
     opacity: 1;
     pointer-events: auto;
   }
 
-  /* Mood neon colors below */
-  /* Base states: dimmed neon colors for text & border*/
+  
+  
   button.happy {
-    color: #7a6f00; /* dimmed neon yellow */
+    color: #7a6f00; /*  neon yellow */
     border-color: transparent;
   }
   button.sad {
-    color: #0a2f8a; /* dimmed neon blue */
+    color: #0a2f8a; /*  neon blue */
     border-color: transparent;
   }
   button.energetic {
-    color: #7a0025; /* dimmed neon magenta */
+    color: #7a0025; /*  neon magenta */
     border-color: transparent;
   }
   button.calm {
-    color: #005959; /* dimmed neon cyan */
+    color: #005959; /*  neon cyan */
     border-color: transparent;
   }
   button.inspired {
-    color: #4b007a; /* dimmed neon purple */
+    color: #4b007a; /*  neon purple */
     border-color: transparent;
   }
   button.tired {
-    color: #3c6c2e; /* dimmed neon green */
+    color: #3c6c2e; /*  neon green */
     border-color: transparent;
   }
 
-  /* On hover - neon background fill with glowing border*/
+  
   button.happy:hover,
   button.happy:focus {
     background-color: #fff320;
@@ -195,7 +195,7 @@
       0 0 20px #32cd32;
   }
 
-  /* Responsive font size for small screens */
+  /* Responsive font size*/
   @media(max-width: 380px) {
     button.mood-btn {
       font-size: 1.7rem;
