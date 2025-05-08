@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poem Showcase - Vintage Style</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    body.vintage {
+      padding: 2rem; /* Reduced padding for mobile */
+      background-color: #f1e9db; /* Fallback color */
+    }
+
+    .container {
+      max-width: 90%; /* Use percentage for responsiveness */
+      margin: auto;
+      padding: 1rem; /* Reduced padding */
+      background: #fffbe7;
+      border: 2px solid #3b2f2f; /* Adjusted border */
+      box-shadow: 5px 5px 0 #b9a580; /* Reduced shadow */
+    }
+
+    h1 {
+      font-size: 1.8rem; /* Adjusted font size */
+      border-bottom: 1px dashed currentColor;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      font-style: italic;
+      opacity: 0.8;
+      font-size: 1rem; /* Adjusted font size */
+    }
+
+    .poem {
+      margin-top: 1rem;
+      font-size: 1rem; /* Adjusted font size */
+      line-height: 1.5; /* Adjusted line height */
+      white-space: pre-wrap;
+    }
+
+    /* Media Queries for further adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem; /* Smaller font size for small screens */
+      }
+
+      .description, .poem {
+        font-size: 0.9rem; /* Smaller font size for small screens */
+      }
+    }
+  </style>
+</head>
+<body class="vintage"> 
+  <div class="container">
+    <h1 id="poem-title">Loading...</h1>
+    <div class="description" id="poem-description">Loading description...</div>
+    <div class="poem" id="poem-text">Loading poem...</div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const poemKey = urlParams.get('poem');
+
+    fetch('yellow.json')
+      .then(response => response.json())
+      .then(data => {
+        const poem = data[poemKey];
+        if (poem) {
+          document.getElementById('poem-title').textContent = poem.title;
+          document.getElementById('poem-description').textContent = poem.description;
+          document.getElementById('poem-text').textContent = poem.text;
+
+          if (poem.theme) {
+            document.body.className = `vintage ${poem.theme}`;
+          }
+        } else {
+          document.getElementById('poem-title').textContent = 'Poem Not Found';
+          document.getElementById('poem-description').textContent = '';
+          document.getElementById('poem-text').textContent = 'The requested poem does not exist.';
+        }
+      })
+      .catch(error => {
+        console.error('Error loading poem:', error);
+        document.getElementById('poem-title').textContent = 'Error';
+        document.getElementById('poem-description').textContent = '';
+        document.getElementById('poem-text').textContent = 'Could not load poem data.';
+      });
+  </script>
+</body>
+</html>
